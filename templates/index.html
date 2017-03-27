@@ -1,0 +1,20 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" ng-app>
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <link rel="stylesheet" href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}">
+    </head>
+    <body ng-init="name='Django - Angular app'">
+        {% verbatim %}
+        <div class="container">
+            <h3>Hello, {{ name }} !</h3>
+            <a href="" class="btn btn-success">This is a custom button !</a>
+        </div>
+        {% endverbatim %}
+        <script src="{% static 'assets/vendor/js/angular.min.js' %}"></script>
+        <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+    </body>
+</html>
