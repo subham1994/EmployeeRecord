@@ -9,7 +9,7 @@ class Company(models.Model):
 	class Meta:
 		verbose_name_plural = "Companies"
 
-	def __repr__(self):
+	def __str__(self):
 		return '{name}'.format(name=self.name)
 
 
@@ -24,5 +24,5 @@ class Employee(models.Model):
 	class Meta:
 		verbose_name_plural = "Employees"
 
-	def __repr__(self):
+	def __str__(self):
 		return '{fn} {ln}'.format(fn=self.first_name, ln=self.last_name)
