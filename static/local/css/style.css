@@ -1,0 +1,18 @@
+.navbar {
+    background-color: #28b62c;
+    border-color: #23a127;
+}
+
+.navbar-default .navbar-brand {
+    font-size: 25px;
+    color: #FFF;
+    font-weight: 500;
+}
+
+#main-content {
+    margin-top: 75px;
+}
+
+td, th {
+    text-align: center;
+}

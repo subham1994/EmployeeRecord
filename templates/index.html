@@ -1,20 +1,32 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="en" ng-app>
+<html lang="en" ng-app="recordsApp">
     <head>
+        <base href="/" />
         <meta charset="UTF-8">
         <title>Title</title>
         <link rel="stylesheet" href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'assets/local/css/style.css' %}">
     </head>
-    <body ng-init="name='Django - Angular app'">
+    <body>
         {% verbatim %}
-        <div class="container">
-            <h3>Hello, {{ name }} !</h3>
-            <a href="" class="btn btn-success">This is a custom button !</a>
-        </div>
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="#">Records</a>
+            </div>
+        </nav>
+
+        <!-- Load the different views here -->
+        <ng-view></ng-view>
+
         {% endverbatim %}
         <script src="{% static 'assets/vendor/js/angular.min.js' %}"></script>
+        <script src="{% static 'assets/vendor/js/angular-route.min.js' %}"></script>
         <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'assets/local/js/app.js' %}"></script>
+        <script src="{% static 'assets/local/js/factory/recordsAppFactory.js' %}"></script>
+        <script src="{% static 'assets/local/js/controllers/companiesListController.js' %}"></script>
+        <script src="{% static 'assets/local/js/controllers/employeesListController.js' %}"></script>
     </body>
 </html>
