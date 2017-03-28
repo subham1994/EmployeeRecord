@@ -5,7 +5,7 @@
     <head>
         <base href="/" />
         <meta charset="UTF-8">
-        <title>Title</title>
+        <title>Records App</title>
         <link rel="stylesheet" href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}">
         <link rel="stylesheet" href="{% static 'assets/local/css/style.css' %}">
     </head>
@@ -24,6 +24,7 @@
 
         {% endverbatim %}
         <script src="{% static 'assets/vendor/js/angular.min.js' %}"></script>
+        <script src="{% static 'assets/vendor/js/angular-cookies.min.js' %}"></script>
         <script src="{% static 'assets/vendor/js/angular-route.min.js' %}"></script>
         <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
         <script src="{% static 'assets/local/js/app.js' %}"></script>
@@ -31,5 +32,7 @@
         <script src="{% static 'assets/local/js/controllers/companiesListController.js' %}"></script>
         <script src="{% static 'assets/local/js/controllers/employeesListController.js' %}"></script>
         <script src="{% static 'assets/local/js/controllers/updateEmployeeController.js' %}"></script>
+        <script src="{% static 'assets/local/js/controllers/addCompanyController.js' %}"></script>
+        <script src="{% static 'assets/local/js/controllers/addEmployeeController.js' %}"></script>
     </body>
 </html>

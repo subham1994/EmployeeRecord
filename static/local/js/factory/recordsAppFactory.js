@@ -6,6 +6,15 @@
 
     angular.module('recordsApp').factory('recordsAppFactory', ['$http', function ($http) {
 
+        var addCompany = function (company) {
+            console.log(company);
+            return $http.post('/api/company/', company);
+        };
+
+        var addEmployee = function (employee) {
+            return $http.post('/api/employee/', employee);
+        };
+
         var deleteCompany = function (companyId) {
             return $http.post('/api/company/', { id: companyId }, {
                 headers: {
@@ -22,8 +31,10 @@
             });
         };
 
-        var fetchComapnies = function () {
-            return $http.get('/api/companies/');
+        var fetchComapnies = function (pageNo) {
+            return $http.get('/api/companies/', {
+                params: { page: pageNo }
+            });
         };
 
         var fetchEmployeesForCompany = function (companyId) {
@@ -45,6 +56,8 @@
         };
 
         return {
+            addCompany: addCompany,
+            addEmployee: addEmployee,
             deleteCompany: deleteCompany,
             deleteEmployee: deleteEmployee,
             fetchComapnies: fetchComapnies,

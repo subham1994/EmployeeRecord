@@ -3,18 +3,22 @@
     border-color: #23a127;
 }
 
-.navbar-inverse .navbar-brand {
+.navbar-inverse .navbar-brand,
+.navbar-inverse .navbar-brand:hover,
+.navbar-inverse .navbar-brand:visited {
     font-size: 25px;
     color: #FFF;
     font-weight: 700;
 }
 
-.navbar-inverse .navbar-brand:hover {
-    color: #FFF;
+.btn-danger {
+    background-color: #d9534f;
+    border-color: #d43f3a;;
 }
 
-.navbar-inverse .navbar-brand:visited {
-    color: #FFF;
+.btn-danger:hover {
+    background-color: #d9534f;
+    border-color: #d43f3a;;
 }
 
 #main-content {
@@ -52,4 +56,26 @@ input.ng-dirty.ng-valid {
 
 input.ng-dirty.ng-invalid {
     border-color: #ff4136;
+}
+
+.right {
+    float: right;
+    margin-bottom: 20px;
+}
+
+.icon {
+    margin-right: 3px;
+}
+
+.paginator {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.pagination > .active > a,
+.pagination > .active > a:active,
+.pagination > .active > a:hover,
+.pagination > .active > a:visited {
+    background-color: #28b62c;
+    border-color: #23a127;
 }

@@ -7,6 +7,7 @@
     function employeesListController (recordsAppFactory, $routeParams) {
         var self = this;
         self.employees = null;
+        self.companyId = $routeParams.companyId;
 
         self.deleteEmployee = function (employeeId) {
             recordsAppFactory.deleteEmployee(employeeId).then(
@@ -15,7 +16,7 @@
                     // filter the employees list
                     self.employees = self.employees.filter(function (employee) {
                         //noinspection JSUnresolvedVariable
-                        return employee.pk !== employeeId
+                        return employee.pk !== employeeId;
                     });
                 },
                 function (response) {
@@ -25,7 +26,7 @@
         };
 
         //noinspection JSUnresolvedVariable
-        recordsAppFactory.fetchEmployeesForCompany($routeParams.companyId).then(
+        recordsAppFactory.fetchEmployeesForCompany(self.companyId).then(
             function (response) {
                 self.employees = response.data;
             },

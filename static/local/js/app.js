@@ -4,7 +4,7 @@
 
 (function () {
 
-    var recordsApp = angular.module('recordsApp', ['ngRoute'])
+    var recordsApp = angular.module('recordsApp', ['ngRoute', 'ngCookies']);
 
     recordsApp.config([
         '$routeProvider',
@@ -17,6 +17,16 @@
                     controller: 'companiesListController',
                     controllerAs: 'compList',
                     templateUrl: 'static/assets/views/companiesList.html'
+                })
+                .when('/add/company', {
+                    controller: 'addCompanyController',
+                    controllerAs: 'addcmpCtrl',
+                    templateUrl: 'static/assets/views/add-company.html'
+                })
+                .when('/add/employee/:companyId', {
+                    controller: 'addEmployeeController',
+                    controllerAs: 'addEmpCtrl',
+                    templateUrl: 'static/assets/views/add-employee.html'
                 })
                 .when('/employees/:companyId', {
                     controller: 'employeesListController',

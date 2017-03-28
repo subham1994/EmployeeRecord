@@ -1,3 +1,14 @@
+<div class="right">
+    <a href="/add/company" class="btn btn-success btn-xs">
+        <span class="glyphicon glyphicon-plus-sign icon" aria-hidden="true"></span>
+        Add a company record
+    </a>
+    <a href="/" class="btn btn-danger btn-xs">
+        <span class="glyphicon glyphicon-trash icon" aria-hidden="true"></span>
+        Delete all company records
+    </a>
+</div>
+
 <table class="table table-bordered">
     <thead>
         <tr>
@@ -14,12 +25,38 @@
             <td>{{ company.fields.created_at }}</td>
             <td>
                 <a href="/employees/{{ company.pk }}" class="btn btn-success btn-xs">
+                    <span class="glyphicon glyphicon-arrow-right icon" aria-hidden="true"></span>
                     view employees list
                 </a>
                 <a class="btn btn-danger btn-xs" ng-click="compList.deleteCompany(company.pk)">
+                    <span class="glyphicon glyphicon-remove-sign icon" aria-hidden="true"></span>
                     delete company record
                 </a>
             </td>
         </tr>
     </tbody>
 </table>
+
+<nav aria-label="Page navigation" class="paginator">
+    <ul class="pagination">
+
+        <li ng-class="{ 'disabled' : !compList.page.hasPrevPage }">
+            <a href="javascript:void(0);" ng-click="compList.fetchComapnies(compList.page.currPage - 1)"
+               aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+
+        <li ng-repeat="page in compList.range(compList.page.numPages)"
+            ng-class="{ 'active': compList.page.currPage === page }">
+            <a href="javascript:void(0);" ng-click="compList.fetchComapnies(page)">{{ page }}</a>
+        </li>
+
+        <li ng-class="{ 'disabled' : !compList.page.hasNextPage }">
+            <a href="javascript:void(0);" ng-click="compList.fetchComapnies(compList.page.currPage + 1)"
+               aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>

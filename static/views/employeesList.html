@@ -1,3 +1,14 @@
+<div class="right">
+    <a href="/add/employee/{{ empList.companyId }}" class="btn btn-success btn-xs">
+        <span class="glyphicon glyphicon-plus-sign icon" aria-hidden="true"></span>
+        Add new Employee record
+    </a>
+    <a class="btn btn-danger btn-xs">
+        <span class="glyphicon glyphicon-trash icon" aria-hidden="true"></span>
+        Delete all Employee records
+    </a>
+</div>
+
 <table class="table table-bordered">
     <thead>
         <tr>
@@ -17,9 +28,13 @@
             <td>{{ emp.fields.designation }}</td>
             <td>{{ emp.fields.joining_date }}</td>
             <td>
-                <a href="/update/{{ emp.pk }}" class="btn btn-success btn-xs">update employee record</a>
+                <a href="/update/{{ emp.pk }}" class="btn btn-success btn-xs">
+                    <span class="glyphicon glyphicon-pencil icon" aria-hidden="true"></span>
+                    update employee record
+                </a>
                 <a class="btn btn-danger btn-xs"
                    ng-click="empList.deleteEmployee(emp.pk)">
+                    <span class="glyphicon glyphicon-remove-sign icon" aria-hidden="true"></span>
                     delete employee record
                 </a>
             </td>

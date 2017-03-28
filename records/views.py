@@ -1,6 +1,8 @@
+import json
 from datetime import datetime
 
 from django.core import serializers
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.forms.models import model_to_dict
 from django.http import HttpResponse, JsonResponse
 from django.views.generic import View
@@ -10,8 +12,22 @@ from .models import Employee, Company
 
 class CompaniesListView(View):
 	def get(self, request):
-		companies = serializers.serialize('json', Company.objects.all())
-		return HttpResponse(content=companies, content_type='application/json', status=200)
+		companies_list = Company.objects.all()
+		paginator = Paginator(companies_list, 6)
+		page = request.GET.get('page', 1)
+		try:
+			companies = serializers.serialize('json', paginator.page(page).object_list)
+		except PageNotAnInteger:
+			companies = serializers.serialize('json', paginator.page(1).object_list)
+		except EmptyPage:
+			companies = serializers.serialize('json', paginator.page(paginator.num_pages).object_list)
+		return JsonResponse({
+			'companies': companies,
+			'hasNextPage': paginator.page(page).has_next(),
+			'hasPrevPage': paginator.page(page).has_previous(),
+			'numPages': paginator.num_pages,
+			'currPage': paginator.page(page).number
+		}, status=200)
 
 	def delete(self, request):
 		Company.objects.all().delete()
@@ -20,12 +36,12 @@ class CompaniesListView(View):
 
 class CompanyDetailView(View):
 	def post(self, request):
-		company_data = request.POST
+		company_data = json.loads(request.body.decode('utf-8'))
 		try:
 			company = Company(
 				id=company_data.get('id'),
 				name=company_data.get('name'),
-				created_at=datetime.now()
+				created_at=datetime.fromtimestamp(company_data.get('createdAt'))
 			)
 			company.save()
 		except Exception as e:
@@ -34,7 +50,7 @@ class CompanyDetailView(View):
 				'reason': e.args
 			}, status=500)
 		else:
-			return JsonResponse(company_data, status=201)
+			return JsonResponse(model_to_dict(company), status=201)
 
 	def delete(self, request):
 		try:
@@ -57,7 +73,6 @@ class EmployeeDetailView(View):
 
 	def put(self, request):
 		employee_data = request.PUT
-		print(employee_data)
 		try:
 			employee = Employee.objects.get(pk=employee_data.get('id'))
 		except Employee.DoesNotExist:
@@ -77,7 +92,7 @@ class EmployeeDetailView(View):
 				return JsonResponse(model_to_dict(employee), status=200)
 
 	def post(self, request):
-		employee_data = request.POST
+		employee_data = json.loads(request.body.decode('utf-8'))
 		try:
 			employee = Employee(
 				employee_id=employee_data.get('employeeId'),
@@ -85,7 +100,7 @@ class EmployeeDetailView(View):
 				last_name=employee_data.get('lastName'),
 				designation=employee_data.get('designation'),
 				company=Company.objects.get(pk=employee_data.get('companyId')),
-				joining_date=datetime.now()
+				joining_date=datetime.fromtimestamp(employee_data.get('joiningDate'))
 			)
 			employee.save()
 		except Exception as e:
@@ -94,7 +109,7 @@ class EmployeeDetailView(View):
 				'reason': e.args
 			}, status=500)
 		else:
-			return JsonResponse(employee_data, status=201)
+			return JsonResponse(model_to_dict(employee), status=201)
 
 	def delete(self, request):
 		try:
