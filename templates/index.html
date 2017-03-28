@@ -11,14 +11,16 @@
     </head>
     <body>
         {% verbatim %}
-        <nav class="navbar navbar-default navbar-fixed-top">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
-                <a class="navbar-brand" href="#">Records</a>
+                <a class="navbar-brand" href="/">Records</a>
             </div>
         </nav>
 
         <!-- Load the different views here -->
-        <ng-view></ng-view>
+        <div class="container" id="main-content">
+            <ng-view></ng-view>
+        </div>
 
         {% endverbatim %}
         <script src="{% static 'assets/vendor/js/angular.min.js' %}"></script>
@@ -28,5 +30,6 @@
         <script src="{% static 'assets/local/js/factory/recordsAppFactory.js' %}"></script>
         <script src="{% static 'assets/local/js/controllers/companiesListController.js' %}"></script>
         <script src="{% static 'assets/local/js/controllers/employeesListController.js' %}"></script>
+        <script src="{% static 'assets/local/js/controllers/updateEmployeeController.js' %}"></script>
     </body>
 </html>

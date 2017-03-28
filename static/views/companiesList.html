@@ -1,27 +1,25 @@
-<div class="container" id="main-content">
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Created at</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="company in compList.companies">
-                <td>{{ company.pk }}</td>
-                <td>{{ company.fields.name }}</td>
-                <td>{{ company.fields.created_at }}</td>
-                <td>
-                    <a href="/employees/{{ company.pk }}" class="btn btn-success btn-xs">
-                        view employees list
-                    </a>
-                    <a class="btn btn-danger btn-xs" ng-click="compList.deleteCompany(company.pk)">
-                        delete company record
-                    </a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Created at</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="company in compList.companies">
+            <td>{{ company.pk }}</td>
+            <td>{{ company.fields.name }}</td>
+            <td>{{ company.fields.created_at }}</td>
+            <td>
+                <a href="/employees/{{ company.pk }}" class="btn btn-success btn-xs">
+                    view employees list
+                </a>
+                <a class="btn btn-danger btn-xs" ng-click="compList.deleteCompany(company.pk)">
+                    delete company record
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -3,16 +3,53 @@
     border-color: #23a127;
 }
 
-.navbar-default .navbar-brand {
+.navbar-inverse .navbar-brand {
     font-size: 25px;
     color: #FFF;
-    font-weight: 500;
+    font-weight: 700;
+}
+
+.navbar-inverse .navbar-brand:hover {
+    color: #FFF;
+}
+
+.navbar-inverse .navbar-brand:visited {
+    color: #FFF;
 }
 
 #main-content {
-    margin-top: 75px;
+    margin-top: 125px;
 }
 
 td, th {
     text-align: center;
+}
+
+.form-box {
+    border-radius: 3px;
+    padding: 5px 20px 10px 20px;
+    box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
+    border: 1px solid rgba(34,36,38,.15);
+    background-color: #FFF;
+}
+
+
+label {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.form-box .form-stamp {
+    color: #28b62c;
+    text-align: right;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+input.ng-dirty.ng-valid {
+    border-color: #28b62c;
+}
+
+input.ng-dirty.ng-invalid {
+    border-color: #ff4136;
 }

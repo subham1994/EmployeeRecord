@@ -1,27 +1,28 @@
-<div class="container" id="main-content">
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Designation</th>
-                <th>Joining Date</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="emp in empList.employees">
-                <td>{{ emp.fields.employee_id }}</td>
-                <td>{{ emp.fields.first_name }}</td>
-                <td>{{ emp.fields.last_name }}</td>
-                <td>{{ emp.fields.designation }}</td>
-                <td>{{ emp.fields.joining_date }}</td>
-                <td>
-                    <a class="btn btn-success btn-xs">update employee record</a>
-                    <a class="btn btn-danger btn-xs">delete employee record</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Designation</th>
+            <th>Joining Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="emp in empList.employees">
+            <td>{{ emp.fields.employee_id }}</td>
+            <td>{{ emp.fields.first_name }}</td>
+            <td>{{ emp.fields.last_name }}</td>
+            <td>{{ emp.fields.designation }}</td>
+            <td>{{ emp.fields.joining_date }}</td>
+            <td>
+                <a href="/update/{{ emp.pk }}" class="btn btn-success btn-xs">update employee record</a>
+                <a class="btn btn-danger btn-xs"
+                   ng-click="empList.deleteEmployee(emp.pk)">
+                    delete employee record
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -43,19 +43,28 @@ class CompanyDetailView(View):
 			return JsonResponse({'msg': 'record for company not found with the given id'}, status=404)
 		else:
 			company.delete()
-			return JsonResponse({'msg': 'company record deleted successfully'}, status=404)
+			return JsonResponse({'msg': 'company record deleted successfully'}, status=200)
 
 
 class EmployeeDetailView(View):
-	def put(self, request):
-		employee_data = request.PUT
+	def get(self, request):
 		try:
-			employee = Employee.objects.get(pk=request.PUT.get('id'))
+			employee = Employee.objects.get(pk=request.GET.get('id'))
 		except Employee.DoesNotExist:
 			return JsonResponse({'msg': 'record not found for the given employee'}, status=404)
 		else:
-			employee.first_name = employee_data.get('firstName') or employee.first_name
-			employee.last_name = employee_data.get('lastName') or employee.last_name
+			return JsonResponse(model_to_dict(employee), status=200)
+
+	def put(self, request):
+		employee_data = request.PUT
+		print(employee_data)
+		try:
+			employee = Employee.objects.get(pk=employee_data.get('id'))
+		except Employee.DoesNotExist:
+			return JsonResponse({'msg': 'record not found for the given employee'}, status=404)
+		else:
+			employee.first_name = employee_data.get('first_name') or employee.first_name
+			employee.last_name = employee_data.get('last_name') or employee.last_name
 			employee.designation = employee_data.get('designation') or employee.designation
 			try:
 				employee.save()
@@ -99,9 +108,13 @@ class EmployeeDetailView(View):
 
 class EmployeesListView(View):
 	def get(self, request):
+		if 'company_id' in request.GET:
+			pass
 		employees = serializers.serialize('json', Employee.objects.all())
 		return HttpResponse(content=employees, content_type='application/json', status=200)
 
 	def delete(self, request):
+		if 'company_id' in request.DELETE:
+			pass
 		Employee.objects.all().delete()
 		return JsonResponse({'msg': 'Employees list deleted successfully'}, status=200)

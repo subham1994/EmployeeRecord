@@ -9,7 +9,19 @@
         self.companies = null;
 
         self.deleteCompany = function (companyId) {
-            console.log(companyId);
+            recordsAppFactory.deleteCompany(companyId).then(
+                function (response) {
+                    console.log(response.data);
+                    // filter the companies list
+                    self.companies = self.companies.filter(function (company) {
+                        //noinspection JSUnresolvedVariable
+                        return company.pk !== companyId
+                    });
+                },
+                function (response) {
+                    console.log(response.status, response.data);
+                }
+            );
         };
 
         recordsAppFactory.fetchComapnies().then(
@@ -17,7 +29,7 @@
                 self.companies = response.data;
             },
             function (response) {
-                console.log(response);
+                console.log(response.status, response.data);
             }
         );
     }

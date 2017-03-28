@@ -1,0 +1,61 @@
+<div class="row">
+
+    <div class="col-lg-6 col-lg-offset-3">
+        <div class="form-box">
+            <h3 class="form-stamp">Update Employee Record</h3>
+            <form name="updateEmployeeForm"
+                  ng-submit="empCtrl.updateEmployee(empCtrl.employee)" novalidate
+            >
+                <div class="form-group">
+                    <label for="id_emp">Employee Id</label>
+                    <input
+                            type="text" class="form-control"
+                            id="id_emp" placeholder="Employee Id"
+                            ng-model="empCtrl.employee.employee_id" disabled
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="id_fn">First Name</label>
+                    <input
+                            type="text" class="form-control"
+                            id="id_fn" placeholder="First Name"
+                            ng-model="empCtrl.employee.first_name" required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="id_ln">Last Name</label>
+                    <input type="text" class="form-control"
+                           id="id_ln" placeholder="Last Name"
+                           ng-model="empCtrl.employee.last_name" required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="id_des">Designation</label>
+                    <input
+                            type="text" class="form-control"
+                            id="id_des" placeholder="Designation"
+                            ng-model="empCtrl.employee.designation" required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="id_j_date">joining date</label>
+                    <input
+                            type="text" class="form-control"
+                            id="id_j_date" placeholder="YYYY-MM-DD"
+                            ng-model="empCtrl.employee.joining_date" disabled
+                    >
+                </div>
+
+                <button
+                        type="submit" class="btn btn-success"
+                        ng-disabled="updateEmployeeForm.$invalid || updateEmployeeForm.$pristine">
+                    update record
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

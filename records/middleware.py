@@ -1,5 +1,5 @@
 from django.utils.deprecation import MiddlewareMixin
-from django.http import QueryDict
+import json
 
 
 class HttpPostTunnelingMiddleware(MiddlewareMixin):
@@ -9,9 +9,9 @@ class HttpPostTunnelingMiddleware(MiddlewareMixin):
 			if method.lower() == 'put':
 				request.method = 'PUT'
 				request.META['REQUEST_METHOD'] = 'PUT'
-				request.PUT = QueryDict(request.body)
+				request.PUT = json.loads(request.body.decode('utf-8'))
 			if method.lower() == 'delete':
 				request.method = 'DELETE'
 				request.META['REQUEST_METHOD'] = 'DELETE'
-				request.DELETE = QueryDict(request.body)
+				request.DELETE = json.loads(request.body.decode('utf-8'))
 		return None
