@@ -2,12 +2,32 @@ import json
 from datetime import datetime
 
 from django.core import serializers
+from django.contrib import auth
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.forms.models import model_to_dict
 from django.http import HttpResponse, JsonResponse
 from django.views.generic import View
 
 from .models import Employee, Company
+
+
+def login(request):
+	credentials = json.loads(request.body.decode('utf-8'))
+	username, password = credentials.get('username'), credentials.get('password')
+	account = auth.authenticate(username=username, password=password)
+	if account:
+		auth.login(request, account)
+		return JsonResponse({
+			'username': account.username,
+			'firstName': account.first_name,
+			'lastName': account.last_name
+		}, status=200)
+	return JsonResponse({'msg': 'No account found with the provided credentials'}, status=404)
+
+
+def logout(request):
+	auth.logout(request)
+	return JsonResponse({'msg': 'Logged out successfully'}, status=204)
 
 
 class CompaniesListView(View):

@@ -4,9 +4,13 @@
 
 (function () {
 
-    function addCompanyController (recordsAppFactory) {
+    function addCompanyController ($location, recordsAppFactory, authenticationFactory) {
 
         var self = this;
+
+        if (!authenticationFactory.isAuthenticated()) {
+            $location.path('/');
+        }
 
         self.addCompany = function (company) {
             recordsAppFactory.addCompany({
@@ -26,7 +30,9 @@
     }
 
     angular.module('recordsApp').controller('addCompanyController', [
+        '$location',
         'recordsAppFactory',
+        'authenticationFactory',
         addCompanyController
     ]);
 }());

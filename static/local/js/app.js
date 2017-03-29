@@ -18,6 +18,11 @@
                     controllerAs: 'compList',
                     templateUrl: 'static/assets/views/companiesList.html'
                 })
+                .when('/login', {
+                    controller: 'loginController',
+                    controllerAs: 'loginCtrl',
+                    templateUrl: 'static/assets/views/login.html'
+                })
                 .when('/add/company', {
                     controller: 'addCompanyController',
                     controllerAs: 'addcmpCtrl',
@@ -43,5 +48,9 @@
                 });
         }
     ]);
+
+    recordsApp.run(['$http', '$cookies', function ($http, $cookies) {
+        $http.defaults.headers.post['X-CSRFToken'] = $cookies.get('csrftoken');
+    }]);
 
 }());

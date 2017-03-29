@@ -11,9 +11,16 @@
     </head>
     <body>
         {% verbatim %}
-        <nav class="navbar navbar-inverse navbar-fixed-top">
+        <nav class="navbar navbar-inverse navbar-fixed-top" ng-controller="navbarController as nc">
             <div class="container">
                 <a class="navbar-brand" href="/">Records</a>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/">Companies</a></li>
+                    <li ng-show="nc.name"><a href="javascript:void(0);">{{ nc.name }}</a></li>
+                    <li ng-show="nc.name"><a href="javascript:void(0);" ng-click="nc.logout()">Logout</a></li>
+                    <li ng-hide="nc.name"><a href="/login">Login</a></li>
+                </ul>
             </div>
         </nav>
 
@@ -29,10 +36,13 @@
         <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
         <script src="{% static 'assets/local/js/app.js' %}"></script>
         <script src="{% static 'assets/local/js/factory/recordsAppFactory.js' %}"></script>
+        <script src="{% static 'assets/local/js/factory/authenticationFactory.js' %}"></script>
         <script src="{% static 'assets/local/js/controllers/companiesListController.js' %}"></script>
         <script src="{% static 'assets/local/js/controllers/employeesListController.js' %}"></script>
         <script src="{% static 'assets/local/js/controllers/updateEmployeeController.js' %}"></script>
         <script src="{% static 'assets/local/js/controllers/addCompanyController.js' %}"></script>
         <script src="{% static 'assets/local/js/controllers/addEmployeeController.js' %}"></script>
+        <script src="{% static 'assets/local/js/controllers/loginController.js' %}"></script>
+        <script src="{% static 'assets/local/js/controllers/navbarController.js' %}"></script>
     </body>
 </html>

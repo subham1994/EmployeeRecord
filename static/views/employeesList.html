@@ -1,33 +1,64 @@
-<div class="right">
-    <a href="/add/employee/{{ empList.companyId }}" class="btn btn-success btn-xs">
-        <span class="glyphicon glyphicon-plus-sign icon" aria-hidden="true"></span>
-        Add new Employee record
-    </a>
-    <a class="btn btn-danger btn-xs">
-        <span class="glyphicon glyphicon-trash icon" aria-hidden="true"></span>
-        Delete all Employee records
-    </a>
-</div>
+<form class="form-inline right">
+
+    <div class="form-group">
+        <div class="input-group input-group-sm">
+            <span class="input-group-addon" id="sizing-addon2">
+                <span class="glyphicon glyphicon-search"></span>
+            </span>
+            <input
+                    type="search" class="form-control" placeholder="Employee's first name"
+                    aria-describedby="sizing-addon2" style="width: 250px;"
+                    ng-model="empList.filterName.fields.first_name"
+            >
+        </div>
+    </div>
+
+    <span ng-show="empList.is_user_authenticated">
+        <a href="/add/employee/{{ empList.companyId }}" class="btn btn-success btn-xs">
+            <span class="glyphicon glyphicon-plus-sign icon" aria-hidden="true"></span>
+            Add new Employee record
+        </a>
+        <a class="btn btn-danger btn-xs">
+            <span class="glyphicon glyphicon-trash icon" aria-hidden="true"></span>
+            Delete all Employee records
+        </a>
+    </span>
+</form>
 
 <table class="table table-bordered">
     <thead>
         <tr>
-            <th>Id</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Designation</th>
-            <th>Joining Date</th>
-            <th>Actions</th>
+            <th ng-click="sortBy='fields.employee_id';reverse=!reverse">
+                Id
+                <span class="glyphicon glyphicon-sort icon-sort" aria-hidden="true"></span>
+            </th>
+            <th ng-click="sortBy='fields.first_name';reverse=!reverse">
+                First Name
+                <span class="glyphicon glyphicon-sort icon-sort" aria-hidden="true"></span>
+            </th>
+            <th ng-click="sortBy='fields.last_name';reverse=!reverse">
+                Last Name
+                <span class="glyphicon glyphicon-sort icon-sort" aria-hidden="true"></span>
+            </th>
+            <th ng-click="sortBy='fields.designation';reverse=!reverse">
+                Designation
+                <span class="glyphicon glyphicon-sort icon-sort" aria-hidden="true"></span>
+            </th>
+            <th ng-click="sortBy='fields.joining_date';reverse=!reverse">
+                Joining Date
+                <span class="glyphicon glyphicon-sort icon-sort" aria-hidden="true"></span>
+            </th>
+            <th ng-show="empList.is_user_authenticated">Actions</th>
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="emp in empList.employees">
+        <tr ng-repeat="emp in empList.employees | filter:empList.filterName | orderBy:sortBy:reverse ">
             <td>{{ emp.fields.employee_id }}</td>
             <td>{{ emp.fields.first_name }}</td>
             <td>{{ emp.fields.last_name }}</td>
             <td>{{ emp.fields.designation }}</td>
-            <td>{{ emp.fields.joining_date }}</td>
-            <td>
+            <td>{{ emp.fields.joining_date | date }}</td>
+            <td ng-show="empList.is_user_authenticated">
                 <a href="/update/{{ emp.pk }}" class="btn btn-success btn-xs">
                     <span class="glyphicon glyphicon-pencil icon" aria-hidden="true"></span>
                     update employee record

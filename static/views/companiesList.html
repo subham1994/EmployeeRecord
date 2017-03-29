@@ -1,34 +1,61 @@
-<div class="right">
-    <a href="/add/company" class="btn btn-success btn-xs">
-        <span class="glyphicon glyphicon-plus-sign icon" aria-hidden="true"></span>
-        Add a company record
-    </a>
-    <a href="/" class="btn btn-danger btn-xs">
-        <span class="glyphicon glyphicon-trash icon" aria-hidden="true"></span>
-        Delete all company records
-    </a>
-</div>
+<form class="form-inline right">
+
+    <div class="form-group">
+        <div class="input-group input-group-sm">
+            <span class="input-group-addon" id="sizing-addon2">
+                <span class="glyphicon glyphicon-search"></span>
+            </span>
+            <input
+                    type="search" class="form-control" placeholder="company name"
+                    aria-describedby="sizing-addon2" style="width: 250px;"
+                    ng-model="compList.filterName.fields.name"
+            >
+        </div>
+    </div>
+
+    <span ng-show="compList.is_user_authenticated">
+        <a href="/add/company" class="btn btn-success btn-xs">
+            <span class="glyphicon glyphicon-plus-sign icon" aria-hidden="true"></span>
+            Add a company record
+        </a>
+        <a href="/" class="btn btn-danger btn-xs">
+            <span class="glyphicon glyphicon-trash icon" aria-hidden="true"></span>
+            Delete all company records
+        </a>
+    </span>
+</form>
 
 <table class="table table-bordered">
     <thead>
         <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Created at</th>
+            <th ng-click="sortBy='pk';reverse=!reverse">
+                Id
+                <span class="glyphicon glyphicon-sort icon-sort" aria-hidden="true"></span>
+            </th>
+            <th ng-click="sortBy='fields.name';reverse=!reverse">
+                Name
+                <span class="glyphicon glyphicon-sort icon-sort" aria-hidden="true"></span>
+            </th>
+            <th ng-click="sortBy='fields.created_at';reverse=!reverse">
+                Created at
+                <span class="glyphicon glyphicon-sort icon-sort" aria-hidden="true"></span>
+            </th>
             <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="company in compList.companies">
+        <tr ng-repeat="company in compList.companies | filter:compList.filterName | orderBy:sortBy:reverse ">
             <td>{{ company.pk }}</td>
             <td>{{ company.fields.name }}</td>
-            <td>{{ company.fields.created_at }}</td>
+            <td>{{ company.fields.created_at | date }}</td>
             <td>
                 <a href="/employees/{{ company.pk }}" class="btn btn-success btn-xs">
                     <span class="glyphicon glyphicon-arrow-right icon" aria-hidden="true"></span>
                     view employees list
                 </a>
-                <a class="btn btn-danger btn-xs" ng-click="compList.deleteCompany(company.pk)">
+                <a class="btn btn-danger btn-xs" ng-click="compList.deleteCompany(company.pk)"
+                   ng-show="compList.is_user_authenticated"
+                >
                     <span class="glyphicon glyphicon-remove-sign icon" aria-hidden="true"></span>
                     delete company record
                 </a>

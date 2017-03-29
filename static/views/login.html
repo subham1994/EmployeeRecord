@@ -1,0 +1,35 @@
+<div class="row">
+
+    <div class="col-lg-6 col-lg-offset-3">
+        <div class="form-box">
+            <h3 class="form-stamp">Login</h3>
+            <form name="loginForm"
+                  ng-submit="loginCtrl.login(loginCtrl.user)" novalidate
+            >
+                <div class="form-group">
+                    <label for="id_username">username</label>
+                    <input
+                            type="text" class="form-control"
+                            id="id_username" placeholder="username"
+                            ng-model="loginCtrl.user.username" required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="id_password">password</label>
+                    <input
+                            type="password" class="form-control"
+                            id="id_password" placeholder="password"
+                            ng-model="loginCtrl.user.password" required
+                    >
+                </div>
+
+                <button
+                        type="submit" class="btn btn-success"
+                        ng-disabled="loginCtrl.$invalid || loginCtrl.$pristine">
+                    Login
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

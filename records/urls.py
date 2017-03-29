@@ -15,9 +15,18 @@ Including another URLconf
 """
 from django.conf.urls import url
 
-from records.views import CompaniesListView, CompanyDetailView, EmployeeDetailView, EmployeesListView
+from records.views import (
+	CompaniesListView,
+	CompanyDetailView,
+	EmployeeDetailView,
+	EmployeesListView,
+	login,
+	logout
+)
 
 urlpatterns = [
+    url(r'^login/', login),
+    url(r'^logout/', logout),
     url(r'^companies/', CompaniesListView.as_view()),
     url(r'^company/', CompanyDetailView.as_view()),
     url(r'^employee/', EmployeeDetailView.as_view()),

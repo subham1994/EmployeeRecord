@@ -4,10 +4,11 @@
 
 (function () {
 
-    function companiesListController (recordsAppFactory) {
+    function companiesListController (recordsAppFactory,authenticationFactory) {
         var self = this;
         self.companies = null;
         self.page = {};
+        self.is_user_authenticated = authenticationFactory.isAuthenticated();
 
         self.range = function (n) {
             var numbersInRange = [];
@@ -52,6 +53,7 @@
 
     angular.module('recordsApp').controller('companiesListController', [
         'recordsAppFactory',
+        'authenticationFactory',
         companiesListController
     ]);
 }());
