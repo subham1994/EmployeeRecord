@@ -5,7 +5,7 @@
 
 (function () {
 
-    function updateEmployeeController (recordsAppFactory, $routeParams) {
+    function updateEmployeeController ($location, recordsAppFactory, $routeParams) {
         var self = this;
         self.employee = null;
 
@@ -13,6 +13,8 @@
             recordsAppFactory.updateEmployee(employee).then(
                 function (response) {
                     self.employee = response.data;
+                    //noinspection JSUnresolvedVariable
+                    $location.path('/employees/' + self.employee.company);
                 },
                 function (response) {
                     console.log(response.status, response.data);
@@ -33,6 +35,7 @@
     }
 
     angular.module('recordsApp').controller('updateEmployeeController', [
+        '$location',
         'recordsAppFactory',
         '$routeParams',
         updateEmployeeController
