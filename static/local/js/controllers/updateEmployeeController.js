@@ -23,6 +23,7 @@
         //noinspection JSUnresolvedVariable
         recordsAppFactory.fetchEmployee($routeParams.employeeId).then(
             function (response) {
+                console.log(response.data);
                 self.employee = response.data;
             },
             function (response) {

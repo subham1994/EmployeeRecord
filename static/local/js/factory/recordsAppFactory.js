@@ -23,8 +23,24 @@
             });
         };
 
+        var deleteCompanies = function () {
+            return $http.post('/api/companies/', {
+                headers: {
+                    'X-HTTP-METHOD-OVERRIDE': 'DELETE'
+                }
+            });
+        };
+
         var deleteEmployee = function (employeeId) {
             return $http.post('/api/employee/', { id: employeeId }, {
+                headers: {
+                    'X-HTTP-METHOD-OVERRIDE': 'DELETE'
+                }
+            });
+        };
+
+        var deleteEmployeesForCompany = function (companyId) {
+            return $http.post('/api/employees/', { id: companyId }, {
                 headers: {
                     'X-HTTP-METHOD-OVERRIDE': 'DELETE'
                 }
@@ -38,7 +54,9 @@
         };
 
         var fetchEmployeesForCompany = function (companyId) {
-            return $http.get('/api/employees/');
+            return $http.get('/api/employees/', {
+                params: { id: companyId }
+            });
         };
 
         var fetchEmployee = function (employeeId) {
@@ -59,7 +77,9 @@
             addCompany: addCompany,
             addEmployee: addEmployee,
             deleteCompany: deleteCompany,
+            deleteCompanies: deleteCompanies,
             deleteEmployee: deleteEmployee,
+            deleteEmployeesForCompany: deleteEmployeesForCompany,
             fetchComapnies: fetchComapnies,
             fetchEmployee: fetchEmployee,
             fetchEmployeesForCompany: fetchEmployeesForCompany,

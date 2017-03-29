@@ -20,6 +20,7 @@
             }).then(
                 function (response) {
                     console.log(response.data);
+                    $location.path('/');
                 },
                 function (response) {
                     console.log(response.status, response.data);

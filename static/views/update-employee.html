@@ -1,6 +1,12 @@
 <div class="row">
 
     <div class="col-lg-6 col-lg-offset-3">
+        <ol class="breadcrumb">
+            <li><a href="/">Companies</a></li>
+            <li><a href="/employees/{{ empCtrl.employee.company }}">Employees</a></li>
+            <li class="active">Update Employee</li>
+        </ol>
+
         <div class="form-box">
             <h3 class="form-stamp">Update Employee Record</h3>
             <form name="updateEmployeeForm"

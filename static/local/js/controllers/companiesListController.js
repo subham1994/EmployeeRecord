@@ -32,6 +32,18 @@
             );
         };
 
+        self.deleteCompanies = function () {
+            recordsAppFactory.deleteCompanies().then(
+                function (response) {
+                    console.log(response.data);
+                    self.companies = [];
+                },
+                function (response) {
+                    console.log(response.status, response.data);
+                }
+            );
+        };
+
         self.fetchComapnies = function (pageNo) {
             recordsAppFactory.fetchComapnies(pageNo).then(
                 function (response) {

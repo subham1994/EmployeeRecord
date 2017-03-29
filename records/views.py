@@ -143,13 +143,9 @@ class EmployeeDetailView(View):
 
 class EmployeesListView(View):
 	def get(self, request):
-		if 'company_id' in request.GET:
-			pass
-		employees = serializers.serialize('json', Employee.objects.all())
+		employees = serializers.serialize('json', Employee.objects.filter(company__id=request.GET.get('id')))
 		return HttpResponse(content=employees, content_type='application/json', status=200)
 
 	def delete(self, request):
-		if 'company_id' in request.DELETE:
-			pass
-		Employee.objects.all().delete()
+		Employee.objects.filter(company__id=request.DELETE.get('id'))
 		return JsonResponse({'msg': 'Employees list deleted successfully'}, status=200)

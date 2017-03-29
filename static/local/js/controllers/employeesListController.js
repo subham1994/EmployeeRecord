@@ -6,7 +6,7 @@
 
     function employeesListController (recordsAppFactory, authenticationFactory, $routeParams) {
         var self = this;
-        self.employees = null;
+        self.employees = [];
         self.companyId = $routeParams.companyId;
         self.is_user_authenticated = authenticationFactory.isAuthenticated();
 
@@ -19,6 +19,18 @@
                         //noinspection JSUnresolvedVariable
                         return employee.pk !== employeeId;
                     });
+                },
+                function (response) {
+                    console.log(response.status, response.data);
+                }
+            );
+        };
+
+        self.deleteAllEmployees = function () {
+            recordsAppFactory.deleteEmployeesForCompany(self.companyId).then(
+                function (response) {
+                    console.log(response.data)
+                    self.employees = [];
                 },
                 function (response) {
                     console.log(response.status, response.data);
